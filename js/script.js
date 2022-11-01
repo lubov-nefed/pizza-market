@@ -10,9 +10,9 @@ async function getProductsData() {//Получаем массив данных �
         createProduct(name, url, ingredients, description, price, oneSlice);
     }
 }
-getProductsData();
+getProductsData();//?-- Как сделать вызов этой функции при загрузке страницы document.onload?
 
-function checkCart() {
+function checkCart() {//?--Как проверить есть ли в корзине сообщение от ом что она пуста и тогла добавить товар + проверить есть ли уже этот товар в корзине илил нет
     const emptyMessage = document.getElementById('emptyMessage');
     if (cart.firstElementChild == emptyMessage) emptyMessage.remove();
 }
@@ -58,65 +58,60 @@ function createProduct(name, url, ingredients, description, price, oneSlice) {//
 
 function addtoCart(event) {//?--Можно ли как-то через параметр передать в функцию id кннопки/то есть можно ли чем-то заменить currentTarget
     checkCart();
+    const productName = event.currentTarget.parentElement.firstChild.nextSibling.firstChild.innerHTML;//заменить одинаковые обращения к элементам
     //На данный момент корзина пуста, элементов нет, узлы есть
-    //Почему здесь есть пустые текстовые узлы когда я использую childNodes
-    if (cart.firstElementChild) {
-        console.log(cart.children)
-        for(let i = 0; i < cart.children.length; i++) console.log(cart.children[i].id);
-   /*Тогда смотрим есть ли элемент с таким же id какой мы добавляем*/}
-    else {//
-    /*const cartItems  = cart.children;
-    for (let i = 0; i < cartItems.length; i++) {
-        console.log(cartItems[i]);
-    };
-    
+    //?--Почему здесь есть пустые текстовые узлы когда я использую childNodes
 
     
-    console.log()//!--проверить есть ли в корзине сообщение от ом что она пуста и тогла добавить товар + проверить есть ли уже этот товар в корзине илил нет
-    */
-}
-//Рабочий код по добавлению разметки товара в корзину
-const cartProduct = document.createElement('div');
-cartProduct.className = 'cart-product';
-cart.appendChild(cartProduct);
+    if (cart.firstElementChild && document.getElementById(productName)) {//Если в корзине уже есть хотя бы один элемент. Долго не могла понять что нужно делать без цикла.
+        document.getElementById(productName).querySelector('.cart__input').value++;
+    } else {
+    /*Добавление разметки нового товара в корзину*/
+     const cartProduct = document.createElement('div');
+     cartProduct.className = 'cart-product';
+     cart.appendChild(cartProduct);
 
-const img = event.currentTarget.parentElement.firstChild.cloneNode(true);
-cartProduct.appendChild(img);
+     const img = event.currentTarget.parentElement.firstChild.cloneNode(true);
+     cartProduct.appendChild(img);
 
-const title = event.currentTarget.parentElement.firstChild.nextSibling.firstChild.cloneNode(true);
-cartProduct.appendChild(title);
+     const title = event.currentTarget.parentElement.firstChild.nextSibling.firstChild.cloneNode(true);
+     cartProduct.appendChild(title);
 
-cartProduct.id = title.textContent;
+     cartProduct.id = title.textContent;
 
-const cartQuantity = document.createElement('div');
-cartQuantity.className = 'cart-quantity';
-cartProduct.appendChild(cartQuantity);
+     const cartQuantity = document.createElement('div');
+     cartQuantity.className = 'cart-quantity';
+     cartProduct.appendChild(cartQuantity);
 
-const minusBtn = document.createElement('button');
-minusBtn.innerHTML = '-';
-minusBtn.className = 'cart-btn';
-minusBtn.setAttribute('title', 'Decrease');
-cartQuantity.appendChild(minusBtn);
+     const minusBtn = document.createElement('button');
+     minusBtn.innerHTML = '-';
+     minusBtn.className = 'cart-btn';
+     minusBtn.setAttribute('title', 'Decrease');
+     cartQuantity.appendChild(minusBtn);
 
-const cartInput = document.createElement('input');
-cartInput.className = 'cart__input';
-cartInput.setAttribute('maxlength', '3');
-cartQuantity.appendChild(cartInput);
+     const cartInput = document.createElement('input');
+     cartInput.className = 'cart__input';
+     cartInput.value += 1;
+     cartInput.setAttribute('maxlength', '3');
+     cartQuantity.appendChild(cartInput);
 
-const plusBtn = document.createElement('button');
-plusBtn.innerHTML = '+';
-plusBtn.className = 'cart-btn';
-plusBtn.setAttribute('title', 'Increase');
-cartQuantity.appendChild(plusBtn);
+     const plusBtn = document.createElement('button');
+     plusBtn.innerHTML = '+';
+     plusBtn.className = 'cart-btn';
+     plusBtn.setAttribute('title', 'Increase');
+     cartQuantity.appendChild(plusBtn);
 
-const cartDelete = document.createElement('button');
-cartDelete.className = 'cart-delete';
-cartDelete.setAttribute('title', 'Delete');
-const deleteImg = document.createElement('img');
-deleteImg.className = 'cart-delete__img';
-deleteImg.src = 'https://raw.githubusercontent.com/lubov-nefed/ajax-training/63683b87da2467a40237323e4fcd01f93fcbde46/images/delete-icon.svg';
-cartDelete.appendChild(deleteImg);
-cartProduct.appendChild(cartDelete);
+     const cartDelete = document.createElement('button');
+     cartDelete.className = 'cart-delete';
+     cartDelete.setAttribute('title', 'Delete');
+     const deleteImg = document.createElement('img');
+     deleteImg.className = 'cart-delete__img';
+     deleteImg.src = 'https://raw.githubusercontent.com/lubov-nefed/ajax-training/63683b87da2467a40237323e4fcd01f93fcbde46/images/delete-icon.svg';
+     cartDelete.appendChild(deleteImg);
+     cartProduct.appendChild(cartDelete);      
+    }
+ 
+
 //Добавляет цену одного товара из разметки
 /*const price = event.currentTarget.parentElement.firstChild.nextSibling.lastChild.cloneNode(true);
 price.innerHTML = price.innerHTML.slice(0, -1);
