@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8"><!--Кодировка-->    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"><!--Совместимость со старым браузером IE-->    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"><!--Устанавливает масштабирование окна и страницы 1:1-->   
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,500;0,700;0,900;1,400;1,700&display=swap" rel="stylesheet"><!--Подключение шрифтов-->
+    <link rel="stylesheet" href="css/reset.css"><!--Подключение обнуляющих CSS-стилей-->
+    <link rel="stylesheet" href="css/style.css"><!--Подключение CSS--> 
+    <title>Pizza Market</title><!--Название страницы-->
+</head>
+<body><!--Тело страницы-->
+    <div class="wrapper">
+        <header class="header">
+            <div class="container">
+                <div class="logo">
+                    <img class="logo__img" src="https://raw.githubusercontent.com/lubov-nefed/ajax-training/main/images/pizza-market-logo.svg" alt="pizza">
+                    <h1 class="logo__heading">Pizza Market</h1>
+                </div>
+            </div>
+        </header>
+        <main class="main">
+            <div class="container">
+                <div class="products-wrapper">
+                    <h2 class="products__heading">Order our Pizza!</h2>
+                    <div id="products" class="products"></div>
+                </div>
+                <div class="cart-wrapper">
+                    <h2 class="cart__heading">Your Cart</h2>
+                    <div id="cart" class="cart">
+                        <p id="emptyMessage">Your cart is empty.</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <footer class="footer">
+            <div class="container">
+                <h3 class="footer__heading">Pizza Market</h3>
+                <ul class="footer__list">
+                    <li class="footer__list-item"><a href="#" class="footer__link">About</a></li>
+                    <li class="footer__list-item"><a href="#" class="footer__link">Careers</a></li>
+                    <li class="footer__list-item"><a href="#" class="footer__link">Support</a></li>
+                    <li class="footer__list-item"><a href="#" class="footer__link">Contacts</a></li>
+                </ul>
+            </div>
+        </footer>
+    </div>  
+    <script src="js/script.js"></script><!--Подключение JavaScript-->
+</body>
+</html>
