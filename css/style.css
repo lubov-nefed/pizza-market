@@ -46,7 +46,7 @@ body {
     font-size: 1.5em;
     text-align: center;
 }
-.product, .cart-product {
+.product {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -77,8 +77,20 @@ body {
 .cart {
     text-align: center;
 }
+
+.empty-message {
+    text-align: center;
+}
 .cart-product {
-    justify-content: space-around;
+    display: grid;
+    border: solid 2px #000;
+    grid-template-columns: 1fr 1fr 1fr 0.5fr;
+    grid-template-rows: 1fr 0.5fr;
+    place-items: center;
+    margin-top: 10px;
+}
+.cart-product > .product__img {
+    grid-row-end: span 2;
 }
 .cart-btn {
     width: 30px;
@@ -110,8 +122,12 @@ body {
     border: solid 1px #000;
     vertical-align: top;
 }
-.cart-delete__img {
-    
+.cart-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+.hidden {
+    display: none;
 }
 .footer {
     padding: 20px;
