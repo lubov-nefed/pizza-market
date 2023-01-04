@@ -1,4 +1,4 @@
-function addListenerToBtn() {//Добавляем обработчик события на кнопки "Добавить в корзину"
+export function addListenerToBtn() {//Добавляем обработчик события на кнопки "Добавить в корзину"
     const btnCollection = document.querySelectorAll('.btn');
     btnCollection.forEach(element => {
         if(element.classList.contains('product-btn')) {

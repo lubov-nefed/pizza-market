@@ -1,4 +1,5 @@
-function renderCatalogue(dataArr) {//Создаем разметку для каждого товара в каталоге
+import addListenerToBtn from 'list.js';
+export function renderCatalogue(dataArr) {//Создаем разметку для каждого товара в каталоге
     for (obj of dataArr) {
         let { name, url, ingredients, description, price, oneSlice } = obj;        
         products.innerHTML +=`
