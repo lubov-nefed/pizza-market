@@ -50,6 +50,7 @@ function addToCart(event) {
     toggleEmptyCartMessage(); 
 }
 
+const emptyCartMessage = document.querySelector('#emptyMessage');
 function toggleEmptyCartMessage() {
     cart.innerHTML  !== '' ? emptyCartMessage.classList.add('hidden') : emptyCartMessage.classList.remove('hidden');
 }
