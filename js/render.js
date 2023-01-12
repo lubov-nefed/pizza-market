@@ -1,8 +1,7 @@
-import {addListenerToBtn} from '/js/list.js';
+import {addListenerToBtn} from './list.js';
 export function renderCatalogue(dataArr) {//Создаем разметку для каждого товара в каталоге
-    for (let obj of dataArr) {
-        let { name, url, ingredients, description, price, oneSlice } = obj;        
-        products.innerHTML +=`
+    dataArr.forEach (( {name, url, ingredients, description, price, oneSlice} )  => { 
+        products.insertAdjacentHTML ('beforeend', `
         <div class="product">
         <img class="product__img" src="${url}">
         <div class="product__text">
@@ -12,7 +11,7 @@ export function renderCatalogue(dataArr) {//Создаем разметку дл
         <p class="product__price">${price}$</p></div>
         <button class="product-btn btn">Add to Cart</button>
         </div>
-        `;
-        addListenerToBtn();
-    }    
+        `);        
+    } ) 
+    addListenerToBtn('.product-btn');  
 }

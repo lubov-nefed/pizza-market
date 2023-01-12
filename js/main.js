@@ -1,5 +1,2 @@
-import {getProductsData} from '/js/load-data.js';
-const products = document.getElementById('products');
-const cart = document.getElementById('cart');
-
+import {getProductsData} from './load-data.js';
 getProductsData();

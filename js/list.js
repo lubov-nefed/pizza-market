@@ -1,15 +1,9 @@
-export function addListenerToBtn() {//Добавляем обработчик события на кнопки "Добавить в корзину"
-    const btnCollection = document.querySelectorAll('.btn');
-    btnCollection.forEach(element => {
-        if(element.classList.contains('product-btn')) {
-            element.addEventListener('click', addToCart);          
-        } else if (element.classList.contains('increase-btn')) {            
-            element.addEventListener('click', increaseCartProductQuantity);
-        } else if (element.classList.contains('decrease-btn')) {
-            element.addEventListener('click', decreaseCartProductQuantity);
-        }
-    }
-    )
+export function addListenerToBtn(clasName) {//Добавляем обработчик события на кнопки "Добавить в корзину"
+    const btnCollection = document.querySelectorAll(clasName);
+    if (clasName == '.product-btn') btnCollection.forEach(element =>  element.addEventListener('click', addToCart))
+    else if (clasName == '.decrease-btn') btnCollection.forEach(element =>  element.addEventListener('click', decreaseCartProductQuantity))
+    else if (clasName == '.increase-btn') btnCollection.forEach(element =>  element.addEventListener('click', increaseCartProductQuantity))
+    
 }
 
 function addToCart(event) {               
@@ -45,7 +39,9 @@ function addToCart(event) {
             </p>
         </div>
         `
-        addListenerToBtn();
+        addListenerToBtn('.decrease-btn');
+        addListenerToBtn('.increase-btn');
+   
     }
     toggleEmptyCartMessage(); 
 }
