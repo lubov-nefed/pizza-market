@@ -20,7 +20,7 @@ function addToCart(event) {
         increaseCartProductQuantity(event);
     } else {//с инпутом не получилось сделать он обнулялся при каждом добавлении товара в корзину
         /*Добавление разметки нового товара в корзину*/
-        cart.innerHTML += `
+        cart.insertAdjacentHTML ('beforeend', `
         <div class="cart-product" id="${currentProductInfo.title}">
             <img class="product__img" src="${currentProductInfo.imgSrc}"/>
             <h4 class="product__title">${currentProductInfo.title}</h4>
@@ -38,7 +38,7 @@ function addToCart(event) {
                 ${currentProductInfo.price}
             </p>
         </div>
-        `
+        `)
         addListenerToBtn('.decrease-btn');
         addListenerToBtn('.increase-btn');
    
