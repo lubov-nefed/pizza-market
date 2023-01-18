@@ -110,11 +110,23 @@ body {
 .cart-btn:active, .cart-delete:active {
     background-color: #ffaf7a;
 }
-.cart__input {
+.cart__quantity {
     border: solid 1px #000;
     width: 40px;
     padding: 0 5px;
 }
+/*Remove input number arrows: Chrome, Safari, Edge, Opera */
+.cart__quantity::-webkit-outer-spin-button,
+.cart__quantity::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/*Remove input number arrows: Firefox */
+.cart__quantity[type=number] {
+  -moz-appearance: textfield;
+}
+
 .cart-quantity > * {
     margin: 0 5px;
 }
