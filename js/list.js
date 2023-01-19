@@ -1,3 +1,6 @@
+// ToDo: завести переменные под DOM-элементы
+// и найти их с помощью querySelector
+
 export function addListenerToBtn(clasName) {//Добавляем обработчик события на кнопки "Добавить в корзину"
     const btnCollection = document.querySelectorAll(clasName);
     if (clasName == '.product-btn') btnCollection.forEach(element =>  element.addEventListener('click', addToCart))
@@ -51,10 +54,17 @@ function toggleEmptyCartMessage() {
     cart.innerHTML  !== '' ? emptyCartMessage.classList.add('hidden') : emptyCartMessage.classList.remove('hidden');
 }
 
-function increaseCartProductQuantity(event) {
-    let productTitle = event.currentTarget.parentElement.querySelector('.product__title') || event.currentTarget.parentElement.parentElement.querySelector('.product__title');
-    +document.getElementById(productTitle.innerHTML).querySelector('.cart__quantity').innerHTML++;    
+const increaseCartProductQuantity = (evt) => {
+    const card = evt.target.closest('.cart-product');
+    const amount = card.querySelector('.cart__quantity');
+    const currentAmount = parseInt(amount.textContent, 10);
+
+    amount.textContent = currentAmount + 1;
 }
+
+// ToDo: поменять по аналогии с increaseCartProductQuantity
+// функцию decreaseCartProductQuantity,
+// а потом заменить span.cart__quantity на input.cart__quantity
 
 function decreaseCartProductQuantity(event) {
     let productTitle = event.currentTarget.parentElement.parentElement.querySelector('.product__title');
