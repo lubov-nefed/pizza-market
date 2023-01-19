@@ -1,4 +1,8 @@
 import {addListenerToBtn} from './list.js';
+
+// ToDo: завести переменные под DOM-элементы
+// и найти их с помощью querySelector
+
 export function renderCatalogue(dataArr) {//Создаем разметку для каждого товара в каталоге
     if (dataArr) {
         dataArr.forEach (( {name, url, ingredients, description, price, oneSlice} )  => { 
