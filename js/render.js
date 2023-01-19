@@ -4,7 +4,7 @@ import {addListenerToBtn} from './list.js';
 // и найти их с помощью querySelector
 
 export function renderCatalogue(dataArr) {//Создаем разметку для каждого товара в каталоге
-    if (dataArr) {
+    if (dataArr.length > 0) {
         dataArr.forEach (( {name, url, ingredients, description, price, oneSlice} )  => { 
             products.insertAdjacentHTML ('beforeend', `
             <div class="product">
