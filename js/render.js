@@ -1,12 +1,15 @@
-import {addListenerToBtn} from './list.js';
-
-// ToDo: завести переменные под DOM-элементы
+/* eslint-disable import/extensions */
+import addListenerToBtn from './list.js';
+// Done: завести переменные под DOM-элементы
 // и найти их с помощью querySelector
+const products = document.querySelector('.products');
 
-export function renderCatalogue(dataArr) {//Создаем разметку для каждого товара в каталоге
-    if (dataArr.length > 0) {
-        dataArr.forEach (( {name, url, ingredients, description, price, oneSlice} )  => { 
-            products.insertAdjacentHTML ('beforeend', `
+export default function renderCatalogue(dataArr) { // Создаем разметку для каждого товара в каталоге
+  if (dataArr.length) {
+    dataArr.forEach(({
+      name, url, ingredients, description, price,
+    }) => {
+      products.insertAdjacentHTML('beforeend', `
             <div class="product">
             <img class="product__img" src="${url}">
             <div class="product__text">
@@ -16,13 +19,13 @@ export function renderCatalogue(dataArr) {//Создаем разметку дл
             <p class="product__price">${price}$</p></div>
             <button class="product-btn btn">Add to Cart</button>
             </div>
-            `);        
-        } ) 
-    } else {
-        products.insertAdjacentHTML ('beforeend', `
-            <p class="error-message">Sorry! Something went wrong. Try again later.</p>            
             `);
-    }
-    
-    addListenerToBtn('.product-btn');  
+    });
+  } else {
+    products.insertAdjacentHTML('beforeend', `
+            <p class="error-message">Sorry! Something went wrong. Try again later.</p>
+            `);
+  }
+
+  addListenerToBtn('.product-btn');
 }

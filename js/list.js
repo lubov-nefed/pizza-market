@@ -1,29 +1,48 @@
-// ToDo: завести переменные под DOM-элементы
-// и найти их с помощью querySelector
+/* eslint-disable no-use-before-define */
+const increaseCartProductQuantity = (evt) => {
+  const card = evt.target.closest('.cart-product');
+  const amount = card.querySelector('.cart__quantity');
+  const currentAmount = parseInt(amount.textContent, 10);
+  amount.textContent = currentAmount + 1;
+};
 
-export function addListenerToBtn(clasName) {//Добавляем обработчик события на кнопки "Добавить в корзину"
-    const btnCollection = document.querySelectorAll(clasName);
-    if (clasName == '.product-btn') btnCollection.forEach(element =>  element.addEventListener('click', addToCart))
-    else if (clasName == '.decrease-btn') btnCollection.forEach(element =>  element.addEventListener('click', decreaseCartProductQuantity))
-    else if (clasName == '.increase-btn') btnCollection.forEach(element =>  element.addEventListener('click', increaseCartProductQuantity))
-    
+// Done: поменять по аналогии с increaseCartProductQuantity
+// функцию decreaseCartProductQuantity
+
+function decreaseCartProductQuantity(evt) {
+  const card = evt.target.closest('.cart-product');
+  const amount = card.querySelector('.cart__quantity');
+  const currentAmount = parseInt(amount.textContent, 10);
+  if (currentAmount > 1) amount.textContent = currentAmount - 1;
 }
 
-function addToCart(event) {               
-    let currentProduct = event.currentTarget.closest('.product');     
-    let currentProductInfo = {
-        title: currentProduct.querySelector('.product__title').innerHTML, 
-        imgSrc: currentProduct.querySelector('.product__img').src, 
-        price: currentProduct.querySelector('.product__price').innerHTML,
-    };
+// Done: завести переменные под DOM-элементы
+// и найти их с помощью querySelector
+const cart = document.querySelector('.cart');
+const emptyCartMessage = document.querySelector('#emptyMessage');
+function toggleEmptyCartMessage() {
+  if (cart.innerHTML !== '') {
+    emptyCartMessage.classList.add('hidden');
+  } else {
+    emptyCartMessage.classList.remove('hidden');
+  }
+}
 
-    let currentlyAddedProduct = document.getElementById(`${currentProductInfo.title}`);    
+function addToCart(event) {
+  const currentProduct = event.currentTarget.closest('.product');
+  const currentProductInfo = {
+    title: currentProduct.querySelector('.product__title').innerHTML,
+    imgSrc: currentProduct.querySelector('.product__img').src,
+    price: currentProduct.querySelector('.product__price').innerHTML,
+  };
 
-    if (currentlyAddedProduct) {
-        increaseCartProductQuantity(event);
-    } else {//с инпутом не получилось сделать он обнулялся при каждом добавлении товара в корзину
-        /*Добавление разметки нового товара в корзину*/
-        cart.insertAdjacentHTML ('beforeend', `
+  const currentlyAddedProduct = document.getElementById(`${currentProductInfo.title}`);
+
+  if (currentlyAddedProduct) {
+    increaseCartProductQuantity(event);
+  } else {
+    /* Добавление разметки нового товара в корзину */
+    cart.insertAdjacentHTML('beforeend', `
         <div class="cart-product" id="${currentProductInfo.title}">
             <img class="product__img" src="${currentProductInfo.imgSrc}"/>
             <h4 class="product__title">${currentProductInfo.title}</h4>
@@ -41,33 +60,17 @@ function addToCart(event) {
                 ${currentProductInfo.price}
             </p>
         </div>
-        `)
-        addListenerToBtn('.decrease-btn');
-        addListenerToBtn('.increase-btn');
-   
-    }
-    toggleEmptyCartMessage(); 
+        `);
+    addListenerToBtn('.decrease-btn');
+    addListenerToBtn('.increase-btn');
+  }
+  toggleEmptyCartMessage();
 }
 
-const emptyCartMessage = document.querySelector('#emptyMessage');
-function toggleEmptyCartMessage() {
-    cart.innerHTML  !== '' ? emptyCartMessage.classList.add('hidden') : emptyCartMessage.classList.remove('hidden');
-}
-
-const increaseCartProductQuantity = (evt) => {
-    const card = evt.target.closest('.cart-product');
-    const amount = card.querySelector('.cart__quantity');
-    const currentAmount = parseInt(amount.textContent, 10);
-
-    amount.textContent = currentAmount + 1;
-}
-
-// ToDo: поменять по аналогии с increaseCartProductQuantity
-// функцию decreaseCartProductQuantity,
-// а потом заменить span.cart__quantity на input.cart__quantity
-
-function decreaseCartProductQuantity(event) {
-    let productTitle = event.currentTarget.parentElement.parentElement.querySelector('.product__title');
-    let productQuantity = document.getElementById(productTitle.innerHTML).querySelector('.cart__quantity').innerHTML;
-    if (productQuantity > 1) document.getElementById(productTitle.innerHTML).querySelector('.cart__quantity').innerHTML--;//?--Почему не работает productQuantity--;  
+// Добавляем обработчик события на кнопки "Добавить в корзину"
+export default function addListenerToBtn(clasName) {
+  const btnCollection = document.querySelectorAll(clasName);
+  if (clasName === '.product-btn') btnCollection.forEach((element) => element.addEventListener('click', addToCart));
+  else if (clasName === '.decrease-btn') btnCollection.forEach((element) => element.addEventListener('click', decreaseCartProductQuantity));
+  else if (clasName === '.increase-btn') btnCollection.forEach((element) => element.addEventListener('click', increaseCartProductQuantity));
 }
