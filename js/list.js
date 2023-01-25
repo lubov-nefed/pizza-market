@@ -6,9 +6,6 @@ const increaseCartProductQuantity = (evt) => {
   amount.textContent = currentAmount + 1;
 };
 
-// Done: поменять по аналогии с increaseCartProductQuantity
-// функцию decreaseCartProductQuantity
-
 function decreaseCartProductQuantity(evt) {
   const card = evt.target.closest('.cart-product');
   const amount = card.querySelector('.cart__quantity');
@@ -16,8 +13,6 @@ function decreaseCartProductQuantity(evt) {
   if (currentAmount > 1) amount.textContent = currentAmount - 1;
 }
 
-// Done: завести переменные под DOM-элементы
-// и найти их с помощью querySelector
 const cart = document.querySelector('.cart');
 const emptyCartMessage = document.querySelector('#emptyMessage');
 function toggleEmptyCartMessage() {

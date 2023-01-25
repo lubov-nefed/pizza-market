@@ -1,7 +1,6 @@
 /* eslint-disable import/extensions */
 import addListenerToBtn from './list.js';
-// Done: завести переменные под DOM-элементы
-// и найти их с помощью querySelector
+
 const products = document.querySelector('.products');
 
 export default function renderCatalogue(dataArr) { // Создаем разметку для каждого товара в каталоге
