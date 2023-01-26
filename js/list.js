@@ -1,4 +1,8 @@
-/* eslint-disable no-use-before-define */
+export default function addListenerToBtn(className) {
+    const btnCollection = document.querySelectorAll(className);
+    btnCollection.forEach((element) => element.addEventListener('click', addToCart));
+  }
+
 const increaseCartProductQuantity = (evt) => {
   const card = evt.target.closest('.cart-product') || document.getElementById(evt.target.parentElement.querySelector('.product__title').textContent);
   const amount = card.querySelector('.cart__quantity');
@@ -30,17 +34,21 @@ function addToCart(event) {
     imgSrc: currentProduct.querySelector('.product__img').src,
     price: currentProduct.querySelector('.product__price').innerHTML,
   };
-
   const currentlyAddedProduct = document.getElementById(`${currentProductInfo.title}`);
 
   if (currentlyAddedProduct) {
     increaseCartProductQuantity(event);
   } else {
-    /* Добавление разметки нового товара в корзину */
+    render(currentProductInfo);    
+  }
+  toggleEmptyCartMessage();
+}
+
+function render(product) {
     cart.insertAdjacentHTML('beforeend', `
-        <div class="cart-product" id="${currentProductInfo.title}">
-            <img class="product__img" src="${currentProductInfo.imgSrc}"/>
-            <h4 class="product__title">${currentProductInfo.title}</h4>
+        <div class="cart-product" id="${product.title}">
+            <img class="product__img" src="${product.imgSrc}"/>
+            <h4 class="product__title">${product.title}</h4>
             <div class="cart-quantity">
                 <button class="cart-btn decrease-btn btn" title="Decrease">-</button>
                 <span class="cart__quantity">1</span> 
@@ -52,20 +60,13 @@ function addToCart(event) {
                 />
             </button>
             <p class="cart-product__sum">
-                ${currentProductInfo.price}
+                ${product.price}
             </p>
         </div>
         `);
-    addListenerToBtn('.decrease-btn');
-    addListenerToBtn('.increase-btn');
-  }
-  toggleEmptyCartMessage();
-}
-
-// Добавляем обработчик события на кнопки "Добавить в корзину"
-export default function addListenerToBtn(clasName) {
-  const btnCollection = document.querySelectorAll(clasName);
-  if (clasName === '.product-btn') btnCollection.forEach((element) => element.addEventListener('click', addToCart));
-  else if (clasName === '.decrease-btn') btnCollection.forEach((element) => element.addEventListener('click', decreaseCartProductQuantity));
-  else if (clasName === '.increase-btn') btnCollection.forEach((element) => element.addEventListener('click', increaseCartProductQuantity));
+    let decreaseBtn = document.getElementById(product.title).querySelector('.decrease-btn');
+    decreaseBtn.addEventListener('click', decreaseCartProductQuantity);
+    let increaseBtn = document.getElementById(product.title).querySelector('.increase-btn');
+    increaseBtn.addEventListener('click', increaseCartProductQuantity);
+    
 }
