@@ -1,4 +1,3 @@
-/* eslint-disable import/extensions */
 import addListenerToBtn from './list.js';
 
 const products = document.querySelector('.products');

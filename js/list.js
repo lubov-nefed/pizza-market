@@ -1,6 +1,7 @@
 /* eslint-disable no-use-before-define */
 const increaseCartProductQuantity = (evt) => {
   const card = evt.target.closest('.cart-product');
+  console.log(card);
   const amount = card.querySelector('.cart__quantity');
   const currentAmount = parseInt(amount.textContent, 10);
   amount.textContent = currentAmount + 1;
@@ -56,6 +57,7 @@ function addToCart(event) {
             </p>
         </div>
         `);
+    //document.querySelector
     addListenerToBtn('.decrease-btn');
     addListenerToBtn('.increase-btn');
   }
