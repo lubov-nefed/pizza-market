@@ -1,5 +1,6 @@
-// Получаем массив данных товаров
-export default async function getProductsData() {
+export { getProductsData };
+
+async function getProductsData() {
   let content = [];
   try {
     const response = await fetch('https://my-json-server.typicode.com/lubov-nefed/ajax-training/db');

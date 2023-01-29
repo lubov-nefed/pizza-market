@@ -1,6 +1,6 @@
-import getProductsData from './load-data.js';
-import renderCatalogue from './render.js';
+import { getProductsData } from './load-data.js';
+import { createCatalogue } from './catalogue.js';
 
 const data = await getProductsData();
 
-renderCatalogue(data);
+createCatalogue(data);
