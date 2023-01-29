@@ -1,5 +1,5 @@
 import { renderMarkup } from './render.js';
-export {toggleEmptyCartMessage, increaseCartProductQuantity, decreaseCartProductQuantity, addToCart};
+export { addToCart };
 
 function toggleEmptyCartMessage() {
   const cart = document.querySelector('.cart');
