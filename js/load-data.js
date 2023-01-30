@@ -7,8 +7,7 @@ async function getProductsData() {
     if (response.ok) {
       content = await response.json();
       return content.products;
-    }
-    throw Error('Response is not ok');
+    } else throw Error('Response is not ok');
   } catch (err) {
     // eslint-disable-next-line no-console
     console.error(err);
