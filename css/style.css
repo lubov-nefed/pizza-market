@@ -84,6 +84,7 @@ body {
 
 .empty-message {
     text-align: center;
+    margin: 30px;
 }
 .cart-product {
     display: grid;

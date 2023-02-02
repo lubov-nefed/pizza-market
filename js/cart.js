@@ -4,7 +4,7 @@ export { addToCart };
 function toggleEmptyCartMessage() {
   const cart = document.querySelector('.cart');
   const emptyCartMessage = document.querySelector('#emptyMessage');
-  if (cart.innerHTML !== '') {
+  if (cart.innerText != '') {
     emptyCartMessage.classList.add('hidden');
   } else {
     emptyCartMessage.classList.remove('hidden');
@@ -47,6 +47,13 @@ function addToCart(event) {
     decreaseBtn.addEventListener('click', decreaseCartProductQuantity);
     let increaseBtn = document.getElementById(currentProductInfo.name).querySelector('.increase-btn');
     increaseBtn.addEventListener('click', increaseCartProductQuantity);
+    let deleteBtn = document.getElementById(currentProductInfo.name).querySelector('.cart-delete');
+    deleteBtn.addEventListener('click', deleteCartProduct);
   }
+  toggleEmptyCartMessage();
+}
+
+function deleteCartProduct(event) {
+  event.currentTarget.parentElement.remove();
   toggleEmptyCartMessage();
 }
