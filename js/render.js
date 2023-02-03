@@ -21,7 +21,7 @@ function renderMarkup(dataObj, targetEl) {
       <h4 class="product__title">${dataObj.name}</h4>
       <div class="cart-quantity">
       <button class="cart-btn decrease-btn btn" title="Decrease">-</button>
-      <span class="cart__quantity">1</span> 
+      <input class="cart__quantity" value="1" type="number"> 
       <button class="cart-btn increase-btn btn" title="Increase">+</button>                
       </div>
       <button class="cart-delete btn" title="Delete">

@@ -14,15 +14,15 @@ function toggleEmptyCartMessage() {
 const increaseCartProductQuantity = (evt) => {
     const card = evt.target.closest('.cart-product') || document.getElementById(evt.target.parentElement.querySelector('.product__title').textContent);
     const amount = card.querySelector('.cart__quantity');
-    const currentAmount = parseInt(amount.textContent, 10);
-    amount.textContent = currentAmount + 1;
+    const currentAmount = parseInt(amount.value, 10);
+    amount.value = currentAmount + 1;//Если из пользователь сотрет значение из инпута, то эта строка не выполнится выдаст ошибку
   };
   
 function decreaseCartProductQuantity(evt) {
     const card = evt.target.closest('.cart-product');
     const amount = card.querySelector('.cart__quantity');
-    const currentAmount = parseInt(amount.textContent, 10);
-    if (currentAmount > 1) amount.textContent = currentAmount - 1;
+    const currentAmount = parseInt(amount.value, 10);
+    if (currentAmount > 1) amount.value = currentAmount - 1;
 }
 
 function getProductInfo(event) {
@@ -33,6 +33,19 @@ function getProductInfo(event) {
     price: currentProduct.querySelector('.product__price').innerHTML,
   };
   return currentProductInfo;    
+}
+
+
+function deleteCartProduct(event) {
+  event.currentTarget.parentElement.remove();
+  toggleEmptyCartMessage();
+}
+
+function checkInput(event) {
+  let inputValue = event.target.value;
+  if (inputValue === '' || inputValue.includes('.')) {
+    event.target.value = parseInt(inputValue, 10) || 1;  
+  }
 }
 
 function addToCart(event) {
@@ -49,11 +62,8 @@ function addToCart(event) {
     increaseBtn.addEventListener('click', increaseCartProductQuantity);
     let deleteBtn = document.getElementById(currentProductInfo.name).querySelector('.cart-delete');
     deleteBtn.addEventListener('click', deleteCartProduct);
+    let input = document.getElementById(currentProductInfo.name).querySelector('.cart__quantity');
+    input.addEventListener('change', checkInput);
   }
-  toggleEmptyCartMessage();
-}
-
-function deleteCartProduct(event) {
-  event.currentTarget.parentElement.remove();
   toggleEmptyCartMessage();
 }
