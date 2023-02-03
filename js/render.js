@@ -29,7 +29,7 @@ function renderMarkup(dataObj, targetEl) {
       src="https://raw.githubusercontent.com/lubov-nefed/ajax-training/63683b87da2467a40237323e4fcd01f93fcbde46/images/delete-icon.svg"
       />
       </button>
-      <p class="cart-product__sum">
+      <p class="cart-product__sum" data-price="${dataObj.price.slice(0, -1)}">
       ${dataObj.price}
       </p>
       </div>

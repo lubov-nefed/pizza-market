@@ -11,18 +11,33 @@ function toggleEmptyCartMessage() {
   }
 }
 
+function getInputValue(event) {
+  let value = event.target.closest('.cart-quantity').querySelector('.cart__quantity').value
+  return value;
+}
+function countProductSum(event) {
+  let inputValue = getInputValue(event);
+  let cartProductSum = event.target.closest('.cart-product').querySelector('.cart-product__sum');
+  let price = cartProductSum.dataset.price;
+  cartProductSum.innerText = inputValue * price + '$';
+}
+
 const increaseCartProductQuantity = (evt) => {
     const card = evt.target.closest('.cart-product') || document.getElementById(evt.target.parentElement.querySelector('.product__title').textContent);
     const amount = card.querySelector('.cart__quantity');
     const currentAmount = parseInt(amount.value, 10);
-    amount.value = currentAmount + 1;//Если из пользователь сотрет значение из инпута, то эта строка не выполнится выдаст ошибку
+    amount.value = currentAmount + 1;
+    countProductSum(evt);
   };
   
 function decreaseCartProductQuantity(evt) {
     const card = evt.target.closest('.cart-product');
     const amount = card.querySelector('.cart__quantity');
     const currentAmount = parseInt(amount.value, 10);
-    if (currentAmount > 1) amount.value = currentAmount - 1;
+    if (currentAmount > 1) {
+      amount.value = currentAmount - 1;
+      countProductSum(evt);
+    }
 }
 
 function getProductInfo(event) {
@@ -35,17 +50,17 @@ function getProductInfo(event) {
   return currentProductInfo;    
 }
 
-
 function deleteCartProduct(event) {
   event.currentTarget.parentElement.remove();
   toggleEmptyCartMessage();
 }
 
 function checkInput(event) {
-  let inputValue = event.target.value;
-  if (inputValue === '' || inputValue.includes('.')) {
+  let inputValue = getInputValue(event);
+  if ((inputValue === '' || '0') || inputValue.includes('.')) {
     event.target.value = parseInt(inputValue, 10) || 1;  
   }
+  countProductSum(event);
 }
 
 function addToCart(event) {
