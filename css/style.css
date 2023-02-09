@@ -48,7 +48,9 @@ body {
 }
 .error-message {
     text-align: center;
-    margin-top: 30px;
+    margin: 30px;
+    padding: 10px;
+    border: solid 2px #ff271f;
 }
 .product {
     display: flex;

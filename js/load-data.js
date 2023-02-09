@@ -11,5 +11,4 @@ async function getProductsData(onsuccess, onerror) {
   } catch (err) {
     onerror();
   }
-  return content;
 }
