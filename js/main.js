@@ -1,7 +1,5 @@
 import { getProductsData } from './load-data.js';
 import { createCatalogue } from './catalogue.js';
+import { renderErr } from './error-handle.js'
 
-//const data = await getProductsData();
-getProductsData(createCatalogue, ()=>{renderErr()});
-
-createCatalogue(data);
+getProductsData(createCatalogue, renderErr);

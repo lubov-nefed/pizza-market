@@ -21,7 +21,7 @@ function renderMarkup(dataObj, targetEl) {
       <h4 class="product__title">${dataObj.name}</h4>
       <div class="cart-quantity">
       <button class="cart-btn decrease-btn btn" title="Decrease">-</button>
-      <span class="cart__quantity">1</span> 
+      <input class="cart__quantity" value="1" type="number"> 
       <button class="cart-btn increase-btn btn" title="Increase">+</button>                
       </div>
       <button class="cart-delete btn" title="Delete">
@@ -29,7 +29,7 @@ function renderMarkup(dataObj, targetEl) {
       src="https://raw.githubusercontent.com/lubov-nefed/ajax-training/63683b87da2467a40237323e4fcd01f93fcbde46/images/delete-icon.svg"
       />
       </button>
-      <p class="cart-product__sum">
+      <p class="cart-product__sum" data-price="${dataObj.price.slice(0, -1)}">
       ${dataObj.price}
       </p>
       </div>
