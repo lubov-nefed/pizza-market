@@ -12,6 +12,6 @@
     },
     "rules": {
         "linebreak-style": ["error", "windows"],
-        "import/extensions": ["0"]
+        "import/extensions": [0]
     }
 }
