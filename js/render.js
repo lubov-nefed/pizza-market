@@ -1,8 +1,6 @@
-export { renderMarkup };
-
 function renderMarkup(dataObj, targetEl) {
-  let markup = ``;
-  if (targetEl == document.querySelector('.products')) {
+  let markup = '';
+  if (targetEl === document.querySelector('.products')) {
     markup = `
       <div class="product">
       <img class="product__img" src="${dataObj.url}">
@@ -13,9 +11,9 @@ function renderMarkup(dataObj, targetEl) {
       <p class="product__price">${dataObj.price}$</p></div>
       <button class="product-btn btn">Add to Cart</button>
       </div>
-      `
-  } else if (targetEl == document.querySelector('.cart')) {
-      markup = `
+      `;
+  } else if (targetEl === document.querySelector('.cart')) {
+    markup = `
       <div class="cart-product" id="${dataObj.name}">
       <img class="product__img" src="${dataObj.url}"/>
       <h4 class="product__title">${dataObj.name}</h4>
@@ -33,7 +31,9 @@ function renderMarkup(dataObj, targetEl) {
       ${dataObj.price}
       </p>
       </div>
-      `
+      `;
   }
   targetEl.insertAdjacentHTML('beforeend', markup);
 }
+
+export default renderMarkup;
